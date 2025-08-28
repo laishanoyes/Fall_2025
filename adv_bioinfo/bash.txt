@@ -1,0 +1,5 @@
+datasets download virus genome taxon 2697049 \ 
+--host human \ 
+--complete-only \ 
+--include genome,biosample \ 
+--filename sars2_meta.zip
