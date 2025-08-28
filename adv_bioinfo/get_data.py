@@ -17,16 +17,6 @@ def main(n_samples=150, outdir="sars2_meta", seed=42):
     zip_file = outdir.with_suffix(".zip")
     tsv_file = outdir.with_suffix(".tsv")
 
-    print("[INFO] Downloading SARS-CoV-2 metadata...")
-    subprocess.run([
-    	"datasets", "download", "virus", "genome", "taxon", "2697049",
-    	"--host", "human",
-    	"--complete-only",
-#		"--geo-location", "USA",
-    	"--include", "genome,biosample",
-    	"--filename", str(zip_file)
-	], check=True)
-
 
 
     print("[INFO] Converting metadata to TSV...")
@@ -34,7 +24,8 @@ def main(n_samples=150, outdir="sars2_meta", seed=42):
         subprocess.run([
             "dataformat", "tsv", "virus-genome",
             "--package", str(zip_file),
-            "--fields", "accession,virus-pangolin,isolate-collection-date,geo-location"
+            #Need to update the below once we know the actual fields
+			"--fields", "accession,virus-pangolin,isolate-collection-date,geo-location"
         ], check=True, stdout=f_out)
 
     print("[INFO] Filtering to USA samples...")
